@@ -1,7 +1,19 @@
 import Button from "@mui/material/Button";
 import { getBlog } from "./utils/decryption-helper.ts";
-import { TextField } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Container,
+  Grid2 as Grid,
+  Rating,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
+// import { CoffeeIcon } from "@mui/icons-material/CoffeeIcon";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -25,23 +37,55 @@ function App() {
 
   return (
     <>
-      <TextField
-        id="password"
-        label="Password"
-        variant="outlined"
-        value={password}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setPassword(event.target.value);
-        }}
-      />
-      <Button
-        variant="contained"
-        onClick={() => {
-          fetchData(window.location.origin + "/base64-enc");
-        }}
-      >
-        Submit
-      </Button>
+      <Grid container spacing={2}>
+        <Grid size={12} display="flex" justifyContent="center">
+          <Typography variant="h2">Cakkii Coffee Blog</Typography>
+        </Grid>
+        <Grid size={1}></Grid>
+        <Grid container size={10}>
+          <Grid size={6}>
+            <TextField
+              id="password"
+              label="Password"
+              variant="outlined"
+              value={password}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setPassword(event.target.value);
+              }}
+            />
+            <Button
+              variant="contained"
+              onClick={() => {
+                fetchData(window.location.origin + "/base64-enc");
+              }}
+            >
+              Submit
+            </Button>
+          </Grid>
+          <Grid size={6}>
+            <Card variant="outlined">
+              <CardHeader title="Example Cafe" />
+              <CardContent>
+                <Box display="flex" flexDirection="column">
+                  <Box display="fex" justifyContent="end">
+                    <Typography variant="caption">26/12/24</Typography>
+                  </Box>
+                  <Rating name="coffee" value={3} precision={0.5} readOnly />
+                  <Rating name="vibes" value={3.5} precision={0.5} readOnly />
+                </Box>
+              </CardContent>
+
+              <CardActions>
+                <Button>View</Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Grid>
+        <Grid size={1}></Grid>
+        <Grid size={12}>
+          <Typography variant="body1">This is the footer</Typography>
+        </Grid>
+      </Grid>
     </>
   );
 }

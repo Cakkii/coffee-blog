@@ -6,14 +6,16 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  Container,
   Grid2 as Grid,
   Rating,
+  styled,
   TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-// import { CoffeeIcon } from "@mui/icons-material/CoffeeIcon";
+import CoffeeIcon from "@mui/icons-material/Coffee";
+
+import CoffeeBorderIcon from "@mui/icons-material/CoffeeOutlined";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -34,6 +36,15 @@ function App() {
       console.error(error);
     }
   };
+
+  const StyledRating = styled(Rating)({
+    "& .MuiRating-iconFilled": {
+      color: "#563618",
+    },
+    "& .MuiRating-iconHover": {
+      color: "ff3d47",
+    },
+  });
 
   return (
     <>
@@ -70,6 +81,16 @@ function App() {
                   <Box display="fex" justifyContent="end">
                     <Typography variant="caption">26/12/24</Typography>
                   </Box>
+                  <StyledRating
+                    name="customized-color"
+                    defaultValue={2}
+                    getLabelText={(value: number) =>
+                      `${value} Heart${value !== 1 ? "s" : ""}`
+                    }
+                    precision={0.5}
+                    icon={<CoffeeIcon fontSize="inherit" />}
+                    emptyIcon={<CoffeeBorderIcon fontSize="inherit" />}
+                  />
                   <Rating name="coffee" value={3} precision={0.5} readOnly />
                   <Rating name="vibes" value={3.5} precision={0.5} readOnly />
                 </Box>

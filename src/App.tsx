@@ -7,13 +7,13 @@ import {
   CardContent,
   CardHeader,
   Grid2 as Grid,
-  Rating,
   TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { CoffeeRating } from "./components/CoffeeRating.tsx";
 import { VibesRating } from "./components/VibeRating.tsx";
+import { CoffeeBlog } from "./components/CafeBlog.tsx";
 function App() {
   const [password, setPassword] = useState("");
 
@@ -62,22 +62,15 @@ function App() {
             </Button>
           </Grid>
           <Grid size={6}>
-            <Card variant="outlined">
-              <CardHeader title="Example Cafe" />
-              <CardContent>
-                <Box display="flex" flexDirection="column">
-                  <Box display="fex" justifyContent="end">
-                    <Typography variant="caption">26/12/24</Typography>
-                  </Box>
-                  <CoffeeRating value={2} />
-                  <VibesRating value={2} />
-                </Box>
-              </CardContent>
-
-              <CardActions>
-                <Button>View</Button>
-              </CardActions>
-            </Card>
+            <CoffeeBlog
+              cafeHeader="Example cafe"
+              coffeeRating={2}
+              vibesRating={4}
+              date={new Date("2024-12-26")}
+              caption="This cafe had good vibes but its coffee was less than alright. I'd
+            pick a maccas coffee over this
+"
+            />
           </Grid>
         </Grid>
         <Grid size={1}></Grid>

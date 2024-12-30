@@ -19,12 +19,10 @@ export const CoffeeRating: React.FC<Props> = ({ value }) => {
     <StyledRating
       name="customized-color"
       defaultValue={value}
-      getLabelText={(value: number) =>
-        `${value} Coffee${value !== 1 ? "s" : ""}`
-      }
       precision={0.5}
       icon={<CoffeeIcon fontSize="inherit" />}
       emptyIcon={<CoffeeBorderIcon fontSize="inherit" />}
+      sx={{ pb: 1 }}
       readOnly
     />
   );

@@ -19,9 +19,6 @@ export const VibesRating: React.FC<Props> = ({ value }) => {
     <StyledRating
       name="customized-color"
       defaultValue={value}
-      getLabelText={(value: number) =>
-        `${value} Vibes${value !== 1 ? "s" : ""}`
-      }
       precision={0.5}
       icon={<FlareIcon fontSize="inherit" />}
       emptyIcon={<FlareBorderIcon fontSize="inherit" />}

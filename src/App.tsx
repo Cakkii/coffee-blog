@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import { CoffeeRating } from "./components/CoffeeRating.tsx";
 import { VibesRating } from "./components/VibeRating.tsx";
-import { CoffeeBlog } from "./components/CafeBlog.tsx";
+import { CafeBlog } from "./components/CafeBlog.tsx";
 function App() {
   const [password, setPassword] = useState("");
 
@@ -62,14 +62,14 @@ function App() {
             </Button>
           </Grid>
           <Grid size={6}>
-            <CoffeeBlog
+            <CafeBlog
               cafeHeader="Example cafe"
               coffeeRating={2}
               vibesRating={4}
               date={new Date("2024-12-26")}
               caption="This cafe had good vibes but its coffee was less than alright. I'd
-            pick a maccas coffee over this
-"
+            pick a maccas coffee over this"
+              coffeeType="Small flate white"
             />
           </Grid>
         </Grid>

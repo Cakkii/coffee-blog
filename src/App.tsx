@@ -14,6 +14,8 @@ import { useState } from "react";
 import { CoffeeRating } from "./components/CoffeeRating.tsx";
 import { VibesRating } from "./components/VibeRating.tsx";
 import { CafeBlog } from "./components/CafeBlog.tsx";
+import { CoffeeBlog } from "./components/CoffeeBlog.tsx";
+
 function App() {
   const [password, setPassword] = useState("");
 
@@ -60,6 +62,13 @@ function App() {
             >
               Submit
             </Button>
+            <CoffeeBlog
+              cafeHeader="Example coffee"
+              coffeeRating={3.5}
+              date={new Date("2024-01-04")}
+              coffeeType="Iced batch brew"
+              caption="Had nice fruity taste to it, but it just wasn't there. I find that water based ice coffees' are impacted by the flavour of ice"
+            />
           </Grid>
           <Grid size={6}>
             <CafeBlog
@@ -70,6 +79,7 @@ function App() {
               caption="This cafe had good vibes but its coffee was less than alright. I'd
             pick a maccas coffee over this"
               coffeeType="Small flate white"
+              takeAway={false}
             />
           </Grid>
         </Grid>

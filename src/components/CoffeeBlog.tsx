@@ -8,26 +8,21 @@ import {
   Grid2 as Grid,
 } from "@mui/material";
 import { CoffeeRating } from "./CoffeeRating";
-import { VibesRating } from "./VibeRating";
 
 interface Props {
   cafeHeader: string;
   coffeeRating: number;
-  vibesRating: number;
   date: Date;
   caption: string;
   coffeeType: string;
-  takeAway: boolean;
 }
 
-export const CafeBlog: React.FC<Props> = ({
+export const CoffeeBlog: React.FC<Props> = ({
   cafeHeader,
   coffeeRating,
-  vibesRating,
   date,
   caption,
   coffeeType,
-  takeAway,
 }) => {
   return (
     <Card variant="outlined">
@@ -43,18 +38,8 @@ export const CafeBlog: React.FC<Props> = ({
               <CoffeeRating value={coffeeRating} />
             </Grid>
             <Grid size={6}>
-              <Typography variant="subtitle1">Order</Typography>
+              <Typography variant="subtitle1">Coffee Type</Typography>
               <Typography variant="body1">{coffeeType}</Typography>
-            </Grid>
-            <Grid size={6}>
-              <Typography variant="subtitle1">Vibes Rating</Typography>
-              <VibesRating value={vibesRating} />
-            </Grid>
-            <Grid size={6}>
-              <Typography variant="subtitle1">Experience</Typography>
-              <Typography variant="body1">
-                {takeAway ? "Take away" : "Sit down"}
-              </Typography>
             </Grid>
           </Grid>
           <Typography variant="body1" sx={{ mt: 2 }}>

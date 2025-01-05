@@ -85,7 +85,9 @@ function App() {
         </Grid>
         <Grid size={1}></Grid>
         <Grid size={12}>
-          <Typography variant="body1">This is the footer</Typography>
+          <Typography variant="body1">
+            This is the footer and a test commit!
+          </Typography>
         </Grid>
       </Grid>
     </>

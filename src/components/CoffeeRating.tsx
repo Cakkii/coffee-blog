@@ -18,7 +18,7 @@ export const CoffeeRating: React.FC<Props> = ({ value }) => {
   return (
     <StyledRating
       name="customized-color"
-      defaultValue={value}
+      value={value}
       precision={0.5}
       icon={<CoffeeIcon fontSize="inherit" />}
       emptyIcon={<CoffeeBorderIcon fontSize="inherit" />}

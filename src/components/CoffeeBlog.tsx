@@ -9,16 +9,16 @@ import {
 } from "@mui/material";
 import { CoffeeRating } from "./CoffeeRating";
 
-interface Props {
-  cafeHeader: string;
+export interface CoffeeBlogData {
+  coffeeName: string;
   coffeeRating: number;
-  date: Date;
+  date: string;
   caption: string;
   coffeeType: string;
 }
 
-export const CoffeeBlog: React.FC<Props> = ({
-  cafeHeader,
+export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
+  coffeeName,
   coffeeRating,
   date,
   caption,
@@ -28,8 +28,10 @@ export const CoffeeBlog: React.FC<Props> = ({
     <Card variant="outlined">
       <CardContent>
         <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
-          <Typography variant="h5">{cafeHeader}</Typography>
-          <Typography variant="caption">{date.toLocaleDateString()}</Typography>
+          <Typography variant="h5">{coffeeName}</Typography>
+          <Typography variant="caption">
+            {new Date(date).toLocaleDateString()}
+          </Typography>
         </Box>
         <Box display="flex" flexDirection="column">
           <Grid container spacing={1}>

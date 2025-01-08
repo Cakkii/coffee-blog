@@ -10,31 +10,33 @@ import {
 import { CoffeeRating } from "./CoffeeRating";
 import { VibesRating } from "./VibeRating";
 
-interface Props {
-  cafeHeader: string;
+export interface CafeBlogData {
+  cafeName: string;
   coffeeRating: number;
   vibesRating: number;
-  date: Date;
+  date: string;
   caption: string;
-  coffeeType: string;
+  order: string;
   takeAway: boolean;
 }
 
-export const CafeBlog: React.FC<Props> = ({
-  cafeHeader,
+export const CafeBlog: React.FC<CafeBlogData> = ({
+  cafeName,
   coffeeRating,
   vibesRating,
   date,
   caption,
-  coffeeType,
+  order,
   takeAway,
 }) => {
   return (
     <Card variant="outlined">
       <CardContent>
         <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
-          <Typography variant="h5">{cafeHeader}</Typography>
-          <Typography variant="caption">{date.toLocaleDateString()}</Typography>
+          <Typography variant="h5">{cafeName}</Typography>
+          <Typography variant="caption">
+            {new Date(date).toLocaleDateString()}
+          </Typography>
         </Box>
         <Box display="flex" flexDirection="column">
           <Grid container spacing={1}>
@@ -44,7 +46,7 @@ export const CafeBlog: React.FC<Props> = ({
             </Grid>
             <Grid size={6}>
               <Typography variant="subtitle1">Order</Typography>
-              <Typography variant="body1">{coffeeType}</Typography>
+              <Typography variant="body1">{order}</Typography>
             </Grid>
             <Grid size={6}>
               <Typography variant="subtitle1">Vibes Rating</Typography>

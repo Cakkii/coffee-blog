@@ -12,8 +12,9 @@ function App() {
     try {
       const response = await fetch(url);
       if (response.ok) {
-        const data = await response.text();
-        return data.trim();
+        const data = (await response.text()).trim();
+        if (data.length > 0 && data[0] === "<") return "";
+        return data;
       } else {
         throw new Error("Failed to fetch data");
       }
@@ -27,16 +28,19 @@ function App() {
   const [coffees, setCoffees] = useState<CoffeeBlogData[]>([]);
   useEffect(() => {
     const load = async () => {
-      const data =
-        (await fetchData(window.location.origin + "/secrets/blog.json")) ?? "";
-      console.log(data);
-      const json = JSON.parse(data);
-      setCafes(json?.cafes ?? ([] as CafeBlogData[]));
-      setCoffees(json?.coffees ?? ([] as CoffeeBlogData[]));
-      setJsonBlog(data);
+      if (jsonBlog === "") {
+        const data =
+          (await fetchData(window.location.origin + "/secrets/blog.json")) ??
+          "";
+        setJsonBlog(data);
+      } else {
+        const json = JSON.parse(jsonBlog);
+        setCafes(json?.cafes ?? ([] as CafeBlogData[]));
+        setCoffees(json?.coffees ?? ([] as CoffeeBlogData[]));
+      }
     };
     load();
-  }, []);
+  }, [jsonBlog]);
 
   return (
     <>

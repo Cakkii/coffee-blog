@@ -30,7 +30,7 @@ export const CafeBlog: React.FC<CafeBlogData> = ({
   takeAway,
 }) => {
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" sx={{ m: 2 }}>
       <CardContent>
         <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
           <Typography variant="h5">{cafeName}</Typography>
@@ -64,10 +64,6 @@ export const CafeBlog: React.FC<CafeBlogData> = ({
           </Typography>
         </Box>
       </CardContent>
-
-      <CardActions>
-        <Button variant="outlined">View</Button>
-      </CardActions>
     </Card>
   );
 };

@@ -25,7 +25,7 @@ export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
   coffeeType,
 }) => {
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" sx={{ m: 2 }}>
       <CardContent>
         <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
           <Typography variant="h5">{coffeeName}</Typography>
@@ -49,10 +49,6 @@ export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
           </Typography>
         </Box>
       </CardContent>
-
-      <CardActions>
-        <Button variant="outlined">View</Button>
-      </CardActions>
     </Card>
   );
 };

@@ -1,9 +1,10 @@
 import Button from "@mui/material/Button";
 import { getBlog } from "./utils/decryption-helper.ts";
-import { Grid2 as Grid, TextField, Typography } from "@mui/material";
+import { Grid2 as Grid, Grid2, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CafeBlog, CafeBlogData } from "./components/CafeBlog.tsx";
 import { CoffeeBlog, CoffeeBlogData } from "./components/CoffeeBlog.tsx";
+import { VibesRating } from "./components/VibeRating.tsx";
 
 function App() {
   const [password, setPassword] = useState("");

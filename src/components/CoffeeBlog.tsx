@@ -1,13 +1,12 @@
 import {
   Box,
-  Button,
   Card,
-  CardActions,
   CardContent,
   Typography,
   Grid2 as Grid,
 } from "@mui/material";
 import { CoffeeRating } from "./CoffeeRating";
+import { ReactNode } from "react";
 
 export interface CoffeeBlogData {
   coffeeName: string;
@@ -15,6 +14,7 @@ export interface CoffeeBlogData {
   date: string;
   caption: string;
   coffeeType: string;
+  additionalProperties: ReactNode;
 }
 
 export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
@@ -23,6 +23,7 @@ export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
   date,
   caption,
   coffeeType,
+  additionalProperties,
 }) => {
   return (
     <Card variant="outlined" sx={{ m: 2 }}>
@@ -43,6 +44,7 @@ export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
               <Typography variant="subtitle1">Coffee Type</Typography>
               <Typography variant="body1">{coffeeType}</Typography>
             </Grid>
+            {additionalProperties}
           </Grid>
           <Typography variant="body1" sx={{ mt: 2 }}>
             {caption}

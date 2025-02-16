@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import { getBlog } from "./utils/decryption-helper.ts";
-import { Grid2 as Grid, TextField, Typography } from "@mui/material";
+import { Grid2 as Grid, TextField, Typography, Collapse } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CafeBlog, CafeBlogData } from "./components/CafeBlog.tsx";
 import { CoffeeBlog, CoffeeBlogData } from "./components/CoffeeBlog.tsx";
@@ -132,7 +132,7 @@ function App() {
                   <TimelineContent
                     sx={{ py: "12px", px: 2, cursor: "pointer" }}
                     onClick={() =>
-                      selectedBlogs.some((blogIndex) => blogIndex == index)
+                      selectedBlogs.includes(index)
                         ? setSelectedBlogs(
                             selectedBlogs.filter(
                               (selected) => selected !== index,
@@ -141,13 +141,14 @@ function App() {
                         : setSelectedBlogs([...selectedBlogs, index])
                     }
                   >
-                    {selectedBlogs.some((blogIndex) => blogIndex === index) ? (
-                      isCafe(blog) ? (
+                    <Collapse in={selectedBlogs.includes(index)} timeout={300}>
+                      {isCafe(blog) ? (
                         <CafeBlog {...blog} />
                       ) : (
                         <CoffeeBlog {...blog} />
-                      )
-                    ) : (
+                      )}
+                    </Collapse>
+                    <Collapse in={!selectedBlogs.includes(index)} timeout={200}>
                       <>
                         <Typography variant="h6" component="span">
                           {isCafe(blog) ? blog.cafeName : blog.coffeeName}
@@ -156,7 +157,7 @@ function App() {
                           {isCafe(blog) ? blog.order : blog.coffeeType}
                         </Typography>
                       </>
-                    )}
+                    </Collapse>
                   </TimelineContent>
                 </TimelineItem>
               ))}

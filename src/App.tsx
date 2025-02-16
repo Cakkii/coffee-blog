@@ -1,10 +1,9 @@
 import Button from "@mui/material/Button";
 import { getBlog } from "./utils/decryption-helper.ts";
-import { Grid2 as Grid, Grid2, TextField, Typography } from "@mui/material";
+import { Grid2 as Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CafeBlog, CafeBlogData } from "./components/CafeBlog.tsx";
 import { CoffeeBlog, CoffeeBlogData } from "./components/CoffeeBlog.tsx";
-import { VibesRating } from "./components/VibeRating.tsx";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -25,8 +24,13 @@ function App() {
   };
 
   const [jsonBlog, setJsonBlog] = useState("");
-  const [cafes, setCafes] = useState<CafeBlogData[]>([]);
-  const [coffees, setCoffees] = useState<CoffeeBlogData[]>([]);
+
+  type MixedType = CafeBlogData | CoffeeBlogData;
+  const [data, setData] = useState<MixedType[]>([]);
+  const isCafe = (obj: MixedType): obj is CafeBlogData => "cafeName" in obj;
+  const isCoffee = (obj: MixedType): obj is CoffeeBlogData =>
+    "coffeeName" in obj;
+
   useEffect(() => {
     const load = async () => {
       if (jsonBlog === "") {
@@ -35,9 +39,13 @@ function App() {
           "";
         setJsonBlog(data);
       } else {
-        const json = JSON.parse(jsonBlog);
-        setCafes(json?.cafes ?? ([] as CafeBlogData[]));
-        setCoffees(json?.coffees ?? ([] as CoffeeBlogData[]));
+        const json: MixedType[] = JSON.parse(jsonBlog);
+
+        const sortedData = json.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
+
+        setData(sortedData);
       }
     };
     load();
@@ -51,7 +59,7 @@ function App() {
         </Grid>
         <Grid size={1}></Grid>
         <Grid container size={10}>
-          <Grid size={6}>
+          <div>
             <TextField
               id="password"
               label="Password"
@@ -74,15 +82,19 @@ function App() {
             >
               Submit
             </Button>
-            {coffees.map((coffee, index) => (
-              <CoffeeBlog key={`${coffee.coffeeName}-${index}`} {...coffee} />
+          </div>
+          <div>
+            {data.map((item, index) => (
+              <div>
+                {isCafe(item) && (
+                  <CafeBlog key={`${item.cafeName}-${index}`} {...item} />
+                )}
+                {isCoffee(item) && (
+                  <CoffeeBlog key={"${item.coffeeName}-${index}"} {...item} />
+                )}
+              </div>
             ))}
-          </Grid>
-          <Grid size={6}>
-            {cafes.map((cafe, index) => (
-              <CafeBlog key={`${cafe.cafeName}-${index}`} {...cafe} />
-            ))}
-          </Grid>
+          </div>
         </Grid>
         <Grid size={1}></Grid>
         <Grid size={12}>

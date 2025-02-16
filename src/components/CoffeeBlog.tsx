@@ -30,9 +30,9 @@ export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
       <CardContent>
         <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
           <Typography variant="h5">{coffeeName}</Typography>
-          <Typography variant="caption">
+          {/*<Typography variant="caption">
             {new Date(date).toLocaleDateString()}
-          </Typography>
+          </Typography>*/}
         </Box>
         <Box display="flex" flexDirection="column">
           <Grid container spacing={1}>

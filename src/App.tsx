@@ -6,13 +6,19 @@ import { CafeBlog, CafeBlogData } from "./components/CafeBlog.tsx";
 import { CoffeeBlog, CoffeeBlogData } from "./components/CoffeeBlog.tsx";
 import CoffeeIcon from "@mui/icons-material/Coffee";
 import FlareIcon from "@mui/icons-material/Flare";
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+
+import {
+  Timeline,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
+} from "@mui/lab";
+
+import TimelineOppositeContent, {
+  timelineOppositeContentClasses,
+} from "@mui/lab/TimelineOppositeContent";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -39,6 +45,8 @@ function App() {
   const isCafe = (obj: MixedType): obj is CafeBlogData => "cafeName" in obj;
   const isCoffee = (obj: MixedType): obj is CoffeeBlogData =>
     "coffeeName" in obj;
+
+  const [selectedBlogs, setSelectedBlogs] = useState<int[]>([]);
 
   useEffect(() => {
     const load = async () => {
@@ -93,18 +101,22 @@ function App() {
             </Button>
           </div>
           <div>
-            <Timeline position="alternate">
+            <Timeline
+              sx={{
+                [`& .${timelineOppositeContentClasses.root}`]: {
+                  flex: 0.2,
+                },
+              }}
+            >
               {data.map((blog, index) => (
                 <TimelineItem
                   key={`${isCafe(blog) ? blog.cafeName : blog.coffeeName}-${index}`}
                 >
-                  <TimelineOppositeContent sx={{ py: "12px", px: 2 }}>
-                    <Typography variant="h6" component="span">
-                      {isCafe(blog) ? blog.cafeName : blog.coffeeName}
-                    </Typography>
-                    <Typography>
-                      {isCafe(blog) ? blog.order : blog.coffeeType}
-                    </Typography>
+                  <TimelineOppositeContent
+                    color="text.secondary"
+                    sx={{ m: "auto 0" }}
+                  >
+                    {new Date(blog.date).toLocaleDateString()}
                   </TimelineOppositeContent>
                   <TimelineSeparator>
                     <TimelineDot color="primary">
@@ -116,24 +128,39 @@ function App() {
                     </TimelineDot>
                     <TimelineConnector />
                   </TimelineSeparator>
-                  <TimelineContent color="text.secondary" sx={{ m: "auto 0" }}>
-                    {new Date(blog.date).toLocaleDateString()}
+
+                  <TimelineContent
+                    sx={{ py: "12px", px: 2, cursor: "pointer" }}
+                    onClick={() =>
+                      selectedBlogs.some((blogIndex) => blogIndex == index)
+                        ? setSelectedBlogs(
+                            selectedBlogs.filter(
+                              (selected) => selected !== index,
+                            ),
+                          )
+                        : setSelectedBlogs([...selectedBlogs, index])
+                    }
+                  >
+                    {selectedBlogs.some((blogIndex) => blogIndex === index) ? (
+                      isCafe(blog) ? (
+                        <CafeBlog {...blog} />
+                      ) : (
+                        <CoffeeBlog {...blog} />
+                      )
+                    ) : (
+                      <>
+                        <Typography variant="h6" component="span">
+                          {isCafe(blog) ? blog.cafeName : blog.coffeeName}
+                        </Typography>
+                        <Typography>
+                          {isCafe(blog) ? blog.order : blog.coffeeType}
+                        </Typography>
+                      </>
+                    )}
                   </TimelineContent>
                 </TimelineItem>
               ))}
             </Timeline>
-          </div>
-          <div>
-            {data.map((item, index) => (
-              <div>
-                {isCafe(item) && (
-                  <CafeBlog key={`${item.cafeName}-${index}`} {...item} />
-                )}
-                {isCoffee(item) && (
-                  <CoffeeBlog key={`${item.coffeeName}-${index}`} {...item} />
-                )}
-              </div>
-            ))}
           </div>
         </Grid>
         <Grid size={12}>

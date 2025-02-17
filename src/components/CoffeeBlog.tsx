@@ -20,7 +20,6 @@ export interface CoffeeBlogData {
 export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
   coffeeName,
   coffeeRating,
-  date,
   caption,
   coffeeType,
   additionalProperties,

@@ -5,7 +5,6 @@ import {
   TextField,
   Typography,
   Collapse,
-  Container,
   Stack,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -50,8 +49,6 @@ function App() {
   type MixedType = CafeBlogData | CoffeeBlogData;
   const [data, setData] = useState<MixedType[]>([]);
   const isCafe = (obj: MixedType): obj is CafeBlogData => "cafeName" in obj;
-  const isCoffee = (obj: MixedType): obj is CoffeeBlogData =>
-    "coffeeName" in obj;
 
   const [selectedBlogs, setSelectedBlogs] = useState<number[]>([]);
 

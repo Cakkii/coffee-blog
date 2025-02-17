@@ -1,6 +1,13 @@
 import Button from "@mui/material/Button";
 import { getBlog } from "./utils/decryption-helper.ts";
-import { Grid2 as Grid, TextField, Typography, Collapse } from "@mui/material";
+import {
+  Grid2 as Grid,
+  TextField,
+  Typography,
+  Collapse,
+  Container,
+  Stack,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { CafeBlog, CafeBlogData } from "./components/CafeBlog.tsx";
 import { CoffeeBlog, CoffeeBlogData } from "./components/CoffeeBlog.tsx";
@@ -46,7 +53,7 @@ function App() {
   const isCoffee = (obj: MixedType): obj is CoffeeBlogData =>
     "coffeeName" in obj;
 
-  const [selectedBlogs, setSelectedBlogs] = useState<int[]>([]);
+  const [selectedBlogs, setSelectedBlogs] = useState<number[]>([]);
 
   useEffect(() => {
     const load = async () => {
@@ -72,11 +79,14 @@ function App() {
     <>
       <Grid container spacing={2}>
         <Grid size={12} display="flex" justifyContent="center">
-          <Typography variant="h2">Cakkii Coffee Blog</Typography>
+          <Typography variant="h3">Cakkii Coffee Blog</Typography>
         </Grid>
-        <Grid size={1}></Grid>
-        <Grid container size={10}>
-          <div>
+        <Grid size={12} display="flex" justifyContent="center">
+          <Stack
+            direction="column"
+            spacing={1}
+            sx={{ justifyContent: "space-evenly", alignItems: "flex-end" }}
+          >
             <TextField
               id="password"
               label="Password"
@@ -99,7 +109,9 @@ function App() {
             >
               Submit
             </Button>
-          </div>
+          </Stack>
+        </Grid>
+        <Grid container size={10}>
           <div>
             <Timeline
               sx={{

@@ -56,8 +56,7 @@ function App() {
     const load = async () => {
       if (jsonBlog === "") {
         const data =
-          (await fetchData(window.location.origin + "/secrets/blog.json")) ??
-          "";
+          (await fetchData(window.location.href + "/secrets/blog.json")) ?? "";
         setJsonBlog(data);
       } else {
         const json: MixedType[] = JSON.parse(jsonBlog);
@@ -97,7 +96,7 @@ function App() {
               variant="contained"
               onClick={async () => {
                 const encryptedBlog = await fetchData(
-                  window.location.origin + "/base64-enc",
+                  window.location.href + "/base64-enc",
                 );
                 if (encryptedBlog) {
                   setJsonBlog(getBlog(encryptedBlog, password));

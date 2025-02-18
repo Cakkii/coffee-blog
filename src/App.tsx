@@ -11,8 +11,7 @@ import { useEffect, useState } from "react";
 import { CafeBlog, CafeBlogData } from "./components/CafeBlog.tsx";
 import { CoffeeBlog, CoffeeBlogData } from "./components/CoffeeBlog.tsx";
 import CoffeeIcon from "@mui/icons-material/Coffee";
-import FlareIcon from "@mui/icons-material/Flare";
-
+import TableBarIcon from "@mui/icons-material/TableBar";
 import {
   Timeline,
   TimelineSeparator,
@@ -70,9 +69,21 @@ function App() {
 
   return (
     <>
-      <Grid container spacing={2}>
-        <Grid size={12} display="flex" justifyContent="center">
-          <Typography variant="h3">Cakkii Coffee Blog</Typography>
+      <Grid container>
+        <Grid
+          size={12}
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{
+            backgroundColor: "primary.main",
+            color: "primary.contrastText",
+          }}
+        >
+          <Typography variant="h5" sx={{ m: 2 }}>
+            Cakkii Coffee Blog
+          </Typography>
+          <CoffeeIcon sx={{ m: 1, mr: 2 }} />
         </Grid>
         {jsonBlog === "" ? (
           <Grid size={12} display="flex" justifyContent="center">
@@ -130,17 +141,13 @@ function App() {
                 >
                   <TimelineSeparator>
                     <TimelineDot color="primary">
-                      {isCafe(blog) ? (
-                        <FlareIcon sx={{ color: "#39e75f" }} />
-                      ) : (
-                        <CoffeeIcon sx={{ color: "#563618" }} />
-                      )}
+                      {isCafe(blog) ? <TableBarIcon /> : <CoffeeIcon />}
                     </TimelineDot>
                     <TimelineConnector />
                   </TimelineSeparator>
 
                   <TimelineContent
-                    sx={{ py: "12px", px: 2, cursor: "pointer" }}
+                    sx={{ py: "2px", px: 2, cursor: "pointer" }}
                     onClick={() =>
                       selectedBlogs.includes(index)
                         ? setSelectedBlogs(

@@ -1,14 +1,15 @@
 import React from "react";
 import FlareIcon from "@mui/icons-material/Flare";
 import FlareBorderIcon from "@mui/icons-material/FlareOutlined";
+
 import { styled } from "@mui/material/styles";
 import { Rating } from "@mui/material";
 
-const StyledRating = styled(Rating)({
+const StyledRating = styled(Rating)(({ theme }) => ({
   "& .MuiRating-iconFilled": {
-    color: "#39e75f",
+    color: theme.palette.success.main, // Correctly accesses primary color
   },
-});
+}));
 
 interface Props {
   value: number;

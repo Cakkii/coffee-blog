@@ -15,19 +15,16 @@ import FlareIcon from "@mui/icons-material/Flare";
 
 import {
   Timeline,
-  TimelineItem,
   TimelineSeparator,
   TimelineConnector,
   TimelineContent,
   TimelineDot,
 } from "@mui/lab";
-
-import TimelineOppositeContent, {
-  timelineOppositeContentClasses,
-} from "@mui/lab/TimelineOppositeContent";
+import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 
 function App() {
   const [password, setPassword] = useState("");
+  const [failedPassword, setFailedPassword] = useState(false);
 
   const fetchData = async (url: string) => {
     try {
@@ -77,42 +74,53 @@ function App() {
         <Grid size={12} display="flex" justifyContent="center">
           <Typography variant="h3">Cakkii Coffee Blog</Typography>
         </Grid>
-        <Grid size={12} display="flex" justifyContent="center">
-          <Stack
-            direction="column"
-            spacing={1}
-            sx={{ justifyContent: "space-evenly", alignItems: "flex-end" }}
-          >
-            <TextField
-              id="password"
-              label="Password"
-              variant="outlined"
-              value={password}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setPassword(event.target.value);
-              }}
-            />
-            <Button
-              variant="contained"
-              onClick={async () => {
-                const encryptedBlog = await fetchData(
-                  window.location.href + "/base64-enc",
-                );
-                if (encryptedBlog) {
-                  setJsonBlog(getBlog(encryptedBlog, password));
-                }
-              }}
+        {jsonBlog === "" ? (
+          <Grid size={12} display="flex" justifyContent="center">
+            <Stack
+              direction="column"
+              spacing={1}
+              sx={{ justifyContent: "space-evenly", alignItems: "flex-end" }}
             >
-              Submit
-            </Button>
-          </Stack>
-        </Grid>
-        <Grid container size={10}>
+              <TextField
+                id="password"
+                label="Password"
+                variant="outlined"
+                type="password"
+                value={password}
+                error={failedPassword}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setPassword(event.target.value);
+                }}
+              />
+              <Button
+                variant="contained"
+                onClick={async () => {
+                  const encryptedBlog = await fetchData(
+                    window.location.href + "/base64-enc",
+                  );
+                  if (encryptedBlog) {
+                    try {
+                      setJsonBlog(getBlog(encryptedBlog, password));
+                    } catch {
+                      setFailedPassword(true);
+                    }
+                  }
+                }}
+              >
+                Submit
+              </Button>
+            </Stack>
+          </Grid>
+        ) : (
+          <></>
+        )}
+        <Grid container size={12}>
           <div>
             <Timeline
               sx={{
-                [`& .${timelineOppositeContentClasses.root}`]: {
-                  flex: 0.2,
+                [`& .${timelineItemClasses.root}:before`]: {
+                  flex: 0,
+                  padding: 0,
                 },
               }}
             >
@@ -120,12 +128,6 @@ function App() {
                 <TimelineItem
                   key={`${isCafe(blog) ? blog.cafeName : blog.coffeeName}-${index}`}
                 >
-                  <TimelineOppositeContent
-                    color="text.secondary"
-                    sx={{ m: "auto 0" }}
-                  >
-                    {new Date(blog.date).toLocaleDateString()}
-                  </TimelineOppositeContent>
                   <TimelineSeparator>
                     <TimelineDot color="primary">
                       {isCafe(blog) ? (
@@ -162,7 +164,7 @@ function App() {
                           {isCafe(blog) ? blog.cafeName : blog.coffeeName}
                         </Typography>
                         <Typography>
-                          {isCafe(blog) ? blog.order : blog.coffeeType}
+                          {new Date(blog.date).toLocaleDateString()}
                         </Typography>
                       </>
                     </Collapse>
@@ -172,11 +174,7 @@ function App() {
             </Timeline>
           </div>
         </Grid>
-        <Grid size={12}>
-          <Typography variant="body1">
-            This is the footer and a second test commit!
-          </Typography>
-        </Grid>
+        <Grid size={12}></Grid>
       </Grid>
     </>
   );

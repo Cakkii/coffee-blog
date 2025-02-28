@@ -8,10 +8,31 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import App from "./App.tsx";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { blue, lime, orange, purple } from "@mui/material/colors";
+
+const theme = createTheme({
+  colorSchemes: {
+    light: {
+      palette: {
+        primary: lime,
+        secondary: purple,
+      },
+    },
+    dark: {
+      palette: {
+        primary: orange,
+        secondary: orange,
+      },
+    },
+  },
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <CssBaseline enableColorScheme />
-    <App />
+    <ThemeProvider theme={theme} defaultMode="dark">
+      <CssBaseline enableColorScheme />
+      <App />
+    </ThemeProvider>
   </StrictMode>,
 );

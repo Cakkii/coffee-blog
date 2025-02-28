@@ -6,6 +6,7 @@ import {
   Typography,
   Collapse,
   Stack,
+  useColorScheme,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CafeBlog, CafeBlogData } from "./components/CafeBlog.tsx";
@@ -22,6 +23,9 @@ import {
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 
 function App() {
+  const { mode, setMode } = useColorScheme();
+
+  setMode("system");
   const [password, setPassword] = useState("");
   const [failedPassword, setFailedPassword] = useState(false);
 
@@ -138,6 +142,7 @@ function App() {
               {data.map((blog, index) => (
                 <TimelineItem
                   key={`${isCafe(blog) ? blog.cafeName : blog.coffeeName}-${index}`}
+                  sx={{ ml: 3 }}
                 >
                   <TimelineSeparator>
                     <TimelineDot color="primary">

@@ -20,7 +20,6 @@ const theme = createTheme({
           dark: "#56a761",
           contrastText: "#000",
         },
-        //       secondary: purple, //TODO: Secondary color??
         background: {
           paper: "#fcf5e4",
           default: "#e4dcc8",
@@ -33,9 +32,7 @@ const theme = createTheme({
           main: "#6db478",
           light: "#a7d1ae",
           dark: "#56a761",
-          contrastText: "#fff",
         },
-        //        secondary: purple,
         background: {
           paper: "#262626",
           default: "#3a342e",

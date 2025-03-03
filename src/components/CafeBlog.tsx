@@ -30,14 +30,12 @@ export const CafeBlog: React.FC<CafeBlogData> = ({
     additionalProperties={
       <>
         <Grid size={6}>
-          <Typography variant="subtitle1">Vibes Rating</Typography>
-          <VibesRating value={vibesRating} />
-        </Grid>
-        <Grid size={6}>
-          <Typography variant="subtitle1">Experience</Typography>
           <Typography variant="body1">
             {takeAway ? "Take away" : "Sit down"}
           </Typography>
+        </Grid>
+        <Grid size={6}>
+          <VibesRating value={vibesRating} />
         </Grid>
       </>
     }

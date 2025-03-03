@@ -25,7 +25,7 @@ export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
   additionalProperties,
 }) => {
   return (
-    <Card variant="outlined" sx={{ m: 2 }}>
+    <Card variant="outlined" sx={{ m: 1, p: 1 }}>
       <CardContent>
         <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
           <Typography variant="h5">{coffeeName}</Typography>
@@ -36,11 +36,9 @@ export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
         <Box display="flex" flexDirection="column">
           <Grid container spacing={1}>
             <Grid size={6}>
-              <Typography variant="subtitle1">Coffee Rating</Typography>
               <CoffeeRating value={coffeeRating} />
             </Grid>
             <Grid size={6}>
-              <Typography variant="subtitle1">Coffee Type</Typography>
               <Typography variant="body1">{coffeeType}</Typography>
             </Grid>
             {additionalProperties}

@@ -23,7 +23,7 @@ import {
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 
 function App() {
-  const { mode, setMode } = useColorScheme();
+  const { setMode } = useColorScheme();
 
   setMode("system");
   const [password, setPassword] = useState("");
@@ -94,7 +94,11 @@ function App() {
             <Stack
               direction="column"
               spacing={1}
-              sx={{ justifyContent: "space-evenly", alignItems: "flex-end" }}
+              sx={{
+                justifyContent: "space-evenly",
+                alignItems: "flex-end",
+                m: 4,
+              }}
             >
               <TextField
                 id="password"

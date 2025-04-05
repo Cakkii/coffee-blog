@@ -133,7 +133,7 @@ function App() {
         ) : (
           <></>
         )}
-        <Grid container size={12}>
+        <Grid container size={12} sx={{px:{sm: 0, md: "10%", lg:"20%"}}}>
           <div>
             <Timeline
               sx={{

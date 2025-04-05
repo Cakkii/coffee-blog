@@ -84,10 +84,12 @@ function App() {
             color: "primary.contrastText",
           }}
         >
-          <Typography variant="h5" sx={{ m: 2 }}>
+          <Typography variant="h3" sx={{ m: 2 }}>
             Cakkii Coffee Blog
           </Typography>
-          <CoffeeIcon sx={{ m: 1, mr: 2 }} />
+        <Typography variant="h3">
+          <CoffeeIcon sx={{ mt: 2, mr: 2, fontSize:"inherit" }} />
+        </Typography>
         </Grid>
         {jsonBlog === "" ? (
           <Grid size={12} display="flex" justifyContent="center">
@@ -156,7 +158,7 @@ function App() {
                   </TimelineSeparator>
 
                   <TimelineContent
-                    sx={{ py: "2px", px: 2, cursor: "pointer" }}
+                    sx={{ py: "2px", px: 2, mb:{md:1, lg:2}, cursor: "pointer" }}
                     onClick={() =>
                       selectedBlogs.includes(index)
                         ? setSelectedBlogs(
@@ -176,7 +178,7 @@ function App() {
                     </Collapse>
                     <Collapse in={!selectedBlogs.includes(index)} timeout={200}>
                       <>
-                        <Typography variant="h6" component="span">
+                        <Typography variant="h4" component="span">
                           {isCafe(blog) ? blog.cafeName : blog.coffeeName}
                         </Typography>
                         <Typography>

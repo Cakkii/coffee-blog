@@ -28,7 +28,7 @@ export const CoffeeBlog: React.FC<CoffeeBlogData> = ({
     <Card variant="outlined" sx={{ m: 1, p: 1 }}>
       <CardContent>
         <Box display="flex" justifyContent="space-between" sx={{ mb: 2 }}>
-          <Typography variant="h5">{coffeeName}</Typography>
+          <Typography variant="h4">{coffeeName}</Typography>
           {/*<Typography variant="caption">
             {new Date(date).toLocaleDateString()}
           </Typography>*/}

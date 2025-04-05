@@ -8,9 +8,11 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import App from "./App.tsx";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
+import {createBreakpoints} from "@mui/system";
 
-const theme = createTheme({
+// const breakpoints = createBreakpoints({});
+let theme = createTheme({
   colorSchemes: {
     light: {
       palette: {
@@ -41,6 +43,8 @@ const theme = createTheme({
     },
   },
 });
+
+theme = responsiveFontSizes(theme);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

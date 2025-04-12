@@ -9,7 +9,6 @@ import "@fontsource/roboto/700.css";
 
 import App from "./App.tsx";
 import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
-import {createBreakpoints} from "@mui/system";
 
 // const breakpoints = createBreakpoints({});
 let theme = createTheme({
